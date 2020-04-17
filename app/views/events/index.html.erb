@@ -1,0 +1,11 @@
+<h1>Tutti Gli Eventi</h1>
+
+
+<% @events.each do |e| %>
+	<div class="container">
+		<%= link_to e.name, event_path(e) %>
+		<p>Data: <%= e.date %></p>
+		<p>Posizione: <%= e.location %></p>
+		<p>Descrizione: <%= e.description %></p>
+</div>
+<% end %>

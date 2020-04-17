@@ -10,6 +10,14 @@
   </head>
 
   <body>
+    <% if current_user %>
+      <h6><%= current_user.name %> is currently logged in</h6>
+      <%= link_to "Log the fuck outta here", logout_path, method: :delete %>
+      <%= link_to "il mio profilo", user_path(current_user) %>
+    <% else %>
+      <%= link_to "Log in here", login_path %>
+    <% end %>
+    
     <%= yield %>
   </body>
 </html>
