@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
 	
 	def show
-		@user = User.find(params[:id])
+		if logged_in?
+			@user = User.find(params[:id])
+			@upcoming_events = @user.upcoming_events
+			@previous_events = @user.previous_events
+		else
+			flash[:alert] = "you must be logged in"
+			redirect_to root_path
+		end
 	end
 
 	def new
@@ -10,6 +17,7 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.create(user_params)
+		log_in @user
 		redirect_to user_path(@user)
 	end
 

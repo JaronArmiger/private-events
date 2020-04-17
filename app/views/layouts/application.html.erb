@@ -10,14 +10,21 @@
   </head>
 
   <body>
+    <% flash.each do |msg_type, msg| %>
+      <div><%= msg %></div>
+    <% end %>
     <% if current_user %>
       <h6><%= current_user.name %> is currently logged in</h6>
-      <%= link_to "Log the fuck outta here", logout_path, method: :delete %>
+      <%= link_to "Lasciare", logout_path, method: :delete %>
       <%= link_to "il mio profilo", user_path(current_user) %>
+      <%= link_to "Crea un evento", new_event_path %>
+
     <% else %>
-      <%= link_to "Log in here", login_path %>
+      <%= link_to "Entrare", login_path %>
+      <%= link_to "Crea un account", signup_path %>
     <% end %>
-    
+    <%= link_to "Tutti Gli Eventi", events_path %>
+
     <%= yield %>
   </body>
 </html>

@@ -1,2 +1,21 @@
 <h1><%= @event.name %></h1>
-<h3>hosted by: <%= link_to @event.host.name, user_path(@event.host) %></h3>
+<% if current_user && current_user.id != @event.host.id %>
+    <p><%= link_to "partecipare", edit_attendance_path(@event) %></p>
+<% end %>
+<h3>Ospitato da: <%= link_to @event.host.name, user_path(@event.host) %></h3>
+<h4> Descrizione: </h4>
+<p> <%= @event.description %></p>
+
+<h2>Chi partecipa</h2>
+
+<div class="container">
+  <ul>
+  <% if !(@event.attendees.empty?) %>
+	<% @event.attendees.each do |a| %>
+	  <li><%= link_to a.name, user_path(a) %></li>
+	<% end %>
+  <% else %>
+  	<li>nessuno :(</li>
+  <% end %>
+</ul>
+</div>

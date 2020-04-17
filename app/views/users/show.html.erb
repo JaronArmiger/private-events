@@ -1,12 +1,9 @@
 <h1><%=@user.name %></h1>
 <h3>I Miei Eventi</h3>
-<ul>
-	<% @user.hosted_events.each do |e| %>
-		<div class="container">
-			<%= link_to e.name, event_path(e) %>
-			<p>Data: <%= e.date %></p>
-			<p>Posizione: <%= e.location %></p>
-			<p>Descrizione: <%= e.description %></p>
-		</div>
-	<% end %>
-</ul>
+<div class="container">
+	<%= render partial: 'layouts/event_display', locals: { list: @user.hosted_events } %>
+</div>
+<h3>Eventi a cui partecipero</h3>
+<div class="container">
+	<%= render partial: 'layouts/event_display', locals: { list: @user.attended_events } %>
+</div>

@@ -1,11 +1,9 @@
 <h1>Tutti Gli Eventi</h1>
+<h2>Imminente</h2>
+<%= render partial: 'layouts/event_display', locals: { list: @upcoming } %>
+
+<h2>Gia Successo</h2>
+<%= render partial: 'layouts/event_display', locals: { list: @past } %>
 
 
-<% @events.each do |e| %>
-	<div class="container">
-		<%= link_to e.name, event_path(e) %>
-		<p>Data: <%= e.date %></p>
-		<p>Posizione: <%= e.location %></p>
-		<p>Descrizione: <%= e.description %></p>
-</div>
-<% end %>
+

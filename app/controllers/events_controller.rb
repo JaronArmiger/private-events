@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   
   def index
-  	@events = Event.all.order(date: :desc)
+  	@upcoming = Event.upcoming.order(date: :desc)
+    @past = Event.past.order(date: :desc)
   end
 
   def show
@@ -9,7 +10,12 @@ class EventsController < ApplicationController
   end
 
   def new
-  	@event = Event.new
+  	if logged_in?
+      @event = Event.new
+    else
+      flash[:alert] = "Must be logged in to create an event!"
+      redirect_to root_path
+    end
   end
 
   def create
