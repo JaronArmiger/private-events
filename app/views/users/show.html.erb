@@ -3,6 +3,12 @@
 <div class="container">
 	<%= render partial: 'layouts/event_display', locals: { list: @user.hosted_events } %>
 </div>
+
+<h3>Eventi a cui sono invitato</h3>
+<div class="container">
+	<%= render partial: 'layouts/event_display', locals: { list: @user.invited_events } %>
+</div>
+
 <h3>Eventi a cui partecipero</h3>
 <div class="container">
 	<%= render partial: 'layouts/event_display', locals: { list: @user.attended_events } %>

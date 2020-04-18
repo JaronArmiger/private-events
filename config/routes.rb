@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 	resources :users,       only: [:new, :create, :show]
 	resources :events,      only: [:new, :create, :show, :index]
 	resources :attendances, only: [:edit]
+	resources :invitations, only: [:new, :create]
 end

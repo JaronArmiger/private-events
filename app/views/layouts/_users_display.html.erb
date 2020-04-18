@@ -1,0 +1,11 @@
+<div class="container">
+  <ul>
+  <% if !(list.empty?) %>
+	<% list.each do |a| %>
+	  <li><%= link_to a.name, user_path(a) %></li>
+	<% end %>
+  <% else %>
+  	<li>nessuno :(</li>
+  <% end %>
+</ul>
+</div>

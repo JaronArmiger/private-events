@@ -1,0 +1,7 @@
+<h1>Invita le persone al <i><%= @event.name %></i></h1>
+<% @users.each do |u| %>
+  <% if u != current_user %>
+    <li><%= u.name %>
+    <%= link_to "invitala", invitations_path(user_id: u.id, event_id: @event.id), method: :post %></li>
+  <% end %>
+<% end %>

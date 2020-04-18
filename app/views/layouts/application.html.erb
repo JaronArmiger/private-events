@@ -26,5 +26,6 @@
     <%= link_to "Tutti Gli Eventi", events_path %>
 
     <%= yield %>
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>

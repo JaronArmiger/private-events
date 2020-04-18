@@ -1,19 +1,21 @@
 <% if list && !list.empty? %>
 	<% list.each do |e| %>
 		<div class="container">
-			<h2><%= link_to e.name, event_path(e) %></h2>
+			<h4><%= link_to e.name, event_path(e) %></h4>
 			<p>Data: <%= e.date %></p>
 			<p>Posizione: <%= e.location %></p>
 			<p>Descrizione: <%= e.description %></p>
-			<% if current_user && current_user.id != e.host.id %>
-			  <% if e.attendees.ids.include? current_user.id %>
-			    <b><p>Gia Andando!</p></b>
+			<% if current_user %>
+			  <% if current_user.id != e.host.id %>
+				  <% if e.attendees.ids.include? current_user.id %>
+				    <b><p>Gia Andando!</p></b>
+				  <% elsif e.invited_guests.ids.include? current_user.id %>
+				    <%= link_to "partecipare", edit_attendance_path(e) %>
+				  <% end %>
+				  <p>L'ospite: <%= link_to e.host.name, user_path(e.host) %></p>
 			  <% else %>
-			    <%= link_to "partecipare", edit_attendance_path(e) %>
+			    <p>L'ospite: Io!</p>
 			  <% end %>
-			  <p>L'ospite: <%= link_to e.host.name, user_path(e.host) %></p>
-			<% else %>
-			  <p>L'ospite: Io!</p>
 			<% end %>
 			<p><%=  %></p>
 		</div>

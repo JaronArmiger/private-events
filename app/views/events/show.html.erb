@@ -1,21 +1,20 @@
 <h1><%= @event.name %></h1>
-<% if current_user && current_user.id != @event.host.id %>
+<% if current_user %>
+  <% if current_user.id == @event.host.id %>
+    <p><%= link_to "invita le persone", new_invitation_path(event_id: @event.id) %></p>
+  <% else %>
     <p><%= link_to "partecipare", edit_attendance_path(@event) %></p>
+  <% end %>
 <% end %>
+
 <h3>Ospitato da: <%= link_to @event.host.name, user_path(@event.host) %></h3>
 <h4> Descrizione: </h4>
 <p> <%= @event.description %></p>
 
 <h2>Chi partecipa</h2>
 
-<div class="container">
-  <ul>
-  <% if !(@event.attendees.empty?) %>
-	<% @event.attendees.each do |a| %>
-	  <li><%= link_to a.name, user_path(a) %></li>
-	<% end %>
-  <% else %>
-  	<li>nessuno :(</li>
-  <% end %>
-</ul>
-</div>
+<%= render partial: 'layouts/users_display', locals: { list: @event.attendees } %>
+
+<h2>Chi e invitato</h2>
+<%= render partial: 'layouts/users_display', locals: { list: @event.invited_guests } %>
+
